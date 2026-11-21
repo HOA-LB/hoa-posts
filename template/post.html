@@ -1,0 +1,66 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"Montserrat";font-weight:700;src:url("fonts/montserrat-latin-700-normal.woff2")}
+@font-face{font-family:"Montserrat";font-weight:800;src:url("fonts/montserrat-latin-800-normal.woff2")}
+@font-face{font-family:"Montserrat";font-weight:900;src:url("fonts/montserrat-latin-900-normal.woff2")}
+@font-face{font-family:"Lato";font-weight:400;src:url("fonts/lato-latin-400-normal.woff2")}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1350px;overflow:hidden}
+body{position:relative;background:#0d0b0d;font-family:"Montserrat",sans-serif;color:#fff}
+.bg{position:absolute;inset:0;background:
+  radial-gradient(ellipse 1000px 760px at 540px 640px,rgba(124,45,18,.50) 0%,rgba(90,36,14,.42) 45%,rgba(40,18,13,.30) 75%,rgba(13,11,13,0) 100%),
+  linear-gradient(#0d0b0d,#0d0b0d)}
+.logo{position:absolute;left:50px;top:35px;width:140px;height:90px}
+.tag{position:absolute;right:52px;top:56px;text-align:right}
+.tag b{display:block;font-weight:800;font-size:30px;letter-spacing:5px;color:#fb923c;margin-right:-5px;line-height:36px}
+.tag i{display:block;font-style:normal;font-weight:700;font-size:20px;letter-spacing:4px;color:#8b8b93;margin-right:-4px;margin-top:9px;line-height:24px}
+.title{position:absolute;left:62px;top:182px;width:960px;height:104px;line-height:104px;font-weight:900;font-size:88px;letter-spacing:-.5px;white-space:nowrap;text-transform:uppercase}
+.sub{position:absolute;left:62px;top:284px;width:960px;font-family:"Lato";font-size:34px;line-height:44px;color:#d4d4d8;white-space:nowrap}
+.card{position:absolute;left:50px;top:350px;width:980px;height:640px;border-radius:36px;background:#fff;
+  box-shadow:0 0 34px 4px rgba(234,110,40,.55),0 0 110px 30px rgba(194,65,12,.38);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.card img{max-width:860px;max-height:580px;object-fit:contain}
+.badge{position:absolute;left:780px;top:875px;width:250px;height:250px;border-radius:50%;background:#c2410c;box-shadow:0 8px 26px rgba(0,0,0,.45)}
+.badge svg{position:absolute;inset:0}
+.badge .t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-9deg);text-shadow:0 3px 8px rgba(0,0,0,.35)}
+.badge .s{font-weight:800;font-size:27px;letter-spacing:3px;line-height:30px}
+.badge .a{font-weight:900;font-size:74px;line-height:78px;letter-spacing:-1px;margin:2px 0 4px}
+.price{position:absolute;left:60px;top:1010px;height:160px;line-height:160px;font-weight:900;font-size:126px;letter-spacing:-2.5px;color:#fb923c;white-space:nowrap}
+.old{position:absolute;top:1076px;font-weight:700;font-size:52px;line-height:64px;color:#9ca3af;white-space:nowrap}
+.old:after{content:"";position:absolute;left:-8px;right:-8px;top:31px;height:5px;border-radius:3px;background:#ef4444}
+.line{position:absolute;left:62px;top:1154px;width:700px;font-family:"Lato";font-size:28px;line-height:40px;color:#e5e7eb;white-space:nowrap}
+.bar{position:absolute;left:0;top:1200px;width:1080px;height:100px;background:#fb923c;color:#0d0b0d;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:32.5px;letter-spacing:4.9px;white-space:pre}
+.bar span{font-weight:700;letter-spacing:0;margin:0 30px 0 26px;font-size:44px;font-weight:700}
+.foot{position:absolute;left:0;top:1300px;width:1080px;height:50px;background:#0b0a0e;display:flex;align-items:center;justify-content:center;font-family:"Lato";font-size:24px;color:#9ca3af;white-space:pre}
+</style></head>
+<body>
+<div class="bg"></div>
+<img class="logo" src="logo.png">
+<div class="tag"><b>BLACK NOVEMBER</b><i id="count"></i></div>
+<div class="title" id="title"></div>
+<div class="sub" id="sub"></div>
+<div class="card"><img id="photo"></div>
+<div class="price" id="price"></div>
+<div class="old" id="old"></div>
+<div class="line" id="line"></div>
+<div class="badge"><svg viewBox="0 0 250 250"><circle cx="125" cy="125" r="106" fill="none" stroke="#fff" stroke-width="4.5" stroke-dasharray="11 9" stroke-linecap="butt"/></svg>
+<div class="t"><div class="s">SAVE</div><div class="a" id="save"></div><div class="s" id="when">TODAY</div></div></div>
+<div class="bar">SHOP NOW<span>→</span>HOUSEOFAPPLIANCES.CO</div>
+<div class="foot">Official warranty  ·  Cash on delivery, card or Whish</div>
+<script>
+const D = __DATA__;
+const $ = id => document.getElementById(id);
+$("title").textContent = D.title; $("sub").textContent = D.sub; $("price").textContent = D.price;
+$("old").textContent = D.old; $("line").textContent = D.line; $("save").textContent = D.save;
+$("when").textContent = D.when || "TODAY"; $("count").textContent = D.count || "";
+if (D.photo) $("photo").src = D.photo; else $("photo").remove();
+if (D.mode === "base") document.querySelector(".badge").style.display = "none";
+if (D.mode === "badge") { document.body.style.background = "transparent"; document.documentElement.style.background = "transparent";
+  for (const el of document.body.children) if (!el.classList.contains("badge") && el.tagName !== "SCRIPT") el.style.visibility = "hidden"; }
+function fit(el, max, start){ let s = start; el.style.fontSize = s+"px"; const r = document.createRange(); r.selectNodeContents(el);
+  while (r.getBoundingClientRect().width > max && s > 20){ s -= 1; el.style.fontSize = s+"px"; } }
+document.fonts.ready.then(()=>{ fit($("title"), 956, 88); fit($("sub"), 956, 34); fit($("line"), 690, 28); fit($("save"), 176, 74);
+  const r = document.createRange(); r.selectNodeContents($("price"));
+  $("old").style.left = (r.getBoundingClientRect().right + 32) + "px"; });
+</script>
+</body></html>
