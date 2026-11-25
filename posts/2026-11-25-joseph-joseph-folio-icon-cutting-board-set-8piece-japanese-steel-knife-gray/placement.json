@@ -1,0 +1,25 @@
+{
+ "base": {
+  "left": 0,
+  "top": 0,
+  "width": 1080,
+  "height": 1350
+ },
+ "photo": {
+  "left": 318,
+  "top": 380,
+  "width": 444,
+  "height": 580
+ },
+ "badge": {
+  "left": 750,
+  "top": 845,
+  "width": 310,
+  "height": 320
+ },
+ "order": [
+  "base",
+  "photo",
+  "badge"
+ ]
+}
